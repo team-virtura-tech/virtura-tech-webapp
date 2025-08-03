@@ -1,22 +1,25 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Code, Database, Layout } from 'lucide-react';
+import { SiFigma, SiNodedotjs, SiReact } from '@icons-pack/react-simple-icons';
 
 const technologies = [
   {
-    icon: Code,
+    icon: SiReact,
     name: 'Frontend Development',
     description: 'React, Next.js, TypeScript, Tailwind CSS',
+    color: '#61DAFB', // React blue
   },
   {
-    icon: Database,
+    icon: SiNodedotjs,
     name: 'Backend Development',
     description: 'Node.js, Python, PostgreSQL, MongoDB',
+    color: '#339933', // Node.js green
   },
   {
-    icon: Layout,
+    icon: SiFigma,
     name: 'UI/UX Design',
     description: 'Figma, Adobe XD, User-Centered Design',
+    color: '#F24E1E', // Figma orange
   },
 ];
 
@@ -31,7 +34,7 @@ export default function TechStackSection() {
         {technologies.map((tech) => (
           <Card key={tech.name} className="border-primary/20">
             <CardContent className="flex flex-col items-center p-6 text-center">
-              <tech.icon className="text-primary h-12 w-12" />
+              <tech.icon className="h-12 w-12" style={{ color: tech.color }} />
               <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
                 {tech.name}
               </h3>

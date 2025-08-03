@@ -1,4 +1,6 @@
-import { Code2, Github, Linkedin, Twitter } from 'lucide-react';
+import { SiGithub, SiX } from '@icons-pack/react-simple-icons';
+import { Code2, Linkedin } from 'lucide-react';
+
 import Link from 'next/link';
 
 const Footer = () => {
@@ -27,14 +29,14 @@ const Footer = () => {
                   href="#"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <Twitter className="h-5 w-5" />
+                  <SiX className="h-5 w-5" />
                   <span className="sr-only">Twitter</span>
                 </Link>
                 <Link
                   href="#"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <Github className="h-5 w-5" />
+                  <SiGithub className="h-5 w-5" />
                   <span className="sr-only">GitHub</span>
                 </Link>
                 <Link

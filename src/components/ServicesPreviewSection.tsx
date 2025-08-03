@@ -1,4 +1,5 @@
-import { Code, Globe, Smartphone } from 'lucide-react';
+import { SiAndroid, SiReact } from '@icons-pack/react-simple-icons';
+import { FaCode } from 'react-icons/fa';
 
 const ServicesPreviewSection = () => {
   return (
@@ -19,7 +20,7 @@ const ServicesPreviewSection = () => {
             {/* Web Development */}
             <div className="group bg-card relative rounded-2xl p-8 shadow-lg transition-all hover:shadow-xl">
               <div className="bg-primary mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
-                <Globe className="text-primary-foreground h-6 w-6" />
+                <SiReact className="text-primary-foreground h-6 w-6" />
               </div>
               <h3 className="text-card-foreground mb-4 text-xl font-semibold">
                 Web Applications
@@ -33,7 +34,7 @@ const ServicesPreviewSection = () => {
             {/* Mobile Development */}
             <div className="group bg-card relative rounded-2xl p-8 shadow-lg transition-all hover:shadow-xl">
               <div className="bg-primary mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
-                <Smartphone className="text-primary-foreground h-6 w-6" />
+                <SiAndroid className="text-primary-foreground h-6 w-6" />
               </div>
               <h3 className="text-card-foreground mb-4 text-xl font-semibold">
                 Mobile Apps
@@ -47,7 +48,7 @@ const ServicesPreviewSection = () => {
             {/* Custom Software */}
             <div className="group bg-card relative rounded-2xl p-8 shadow-lg transition-all hover:shadow-xl">
               <div className="bg-primary mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
-                <Code className="text-primary-foreground h-6 w-6" />
+                <FaCode className="text-primary-foreground h-6 w-6" />
               </div>
               <h3 className="text-card-foreground mb-4 text-xl font-semibold">
                 Custom Software

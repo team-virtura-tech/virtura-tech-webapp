@@ -11,12 +11,12 @@ const teamMembers = [
   {
     name: 'Jainil Chauhan',
     role: 'Founder & CEO',
-    image: '/team/jainil-chauhan.jpg',
+    image: '/team/vishal-patel.jpg',
   },
   {
     name: 'Pritesh Patel',
     role: 'Founder & CEO',
-    image: '/team/pritesh-patel.jpg',
+    image: '/team/vishal-patel.jpg',
   },
 ];
 
@@ -35,12 +35,14 @@ export default function TeamSection() {
       <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {teamMembers.map((member) => (
           <Card key={member.name} className="overflow-hidden">
-            <div className="aspect-w-3 aspect-h-4 relative">
+            <div className="relative h-[300px] w-full">
               <Image
                 src={member.image}
                 alt={member.name}
                 fill
                 className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority
               />
             </div>
             <CardContent className="p-6 text-center">
