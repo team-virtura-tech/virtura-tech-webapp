@@ -56,6 +56,7 @@ export const HeroSection = ({ className }: HeroSectionProps) => {
             </div>
           </div>
         </div>
+        {/*  */}
       </section>
     </>
   );
