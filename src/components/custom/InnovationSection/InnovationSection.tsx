@@ -40,7 +40,7 @@ export const InnovationSection = ({
       id="InnovationSection"
       data-component="InnovationSection"
       className={cn(
-        'relative bg-white text-gray-900 py-16 md:py-24 lg:py-32 min-h-screen',
+        'sticky top-0 bg-white text-gray-900 py-16 md:py-24 lg:py-32 min-h-screen z-10',
         className
       )}
     >
