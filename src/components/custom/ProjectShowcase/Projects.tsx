@@ -1,4 +1,5 @@
 'use client';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { StickyScroll } from '../../ui/sticky-scroll-reveal';
 
@@ -51,10 +52,15 @@ const content = [
     ),
   },
 ];
-export function Projects() {
+
+export const Projects = () => {
   return (
-    <div className="w-full min-h-screen py-4">
+    <section
+      id="Projects"
+      data-component="Projects"
+      className={cn('relative w-full bg-[#383838] z-20 min-h-screen')}
+    >
       <StickyScroll content={content} />
-    </div>
+    </section>
   );
-}
+};
