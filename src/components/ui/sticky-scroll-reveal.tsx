@@ -17,9 +17,8 @@ export const StickyScroll = ({
   const [activeCard, setActiveCard] = React.useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    // uncomment line 22 and comment line 23 if you DONT want the overflow container and want to have it change on the entire page scroll
-    // target: ref
-    container: ref,
+    // Using page scroll and targeting the ref element to start when section reaches top
+    target: ref,
     offset: ['start start', 'end start'],
   });
   const cardLength = content.length;
@@ -70,7 +69,7 @@ export const StickyScroll = ({
       animate={{
         backgroundColor: backgroundColors[activeCard % backgroundColors.length],
       }}
-      className="relative flex h-screen justify-center space-x-12 overflow-y-auto p-10 md:space-x-16 lg:space-x-20"
+      className="relative flex min-h-screen justify-center space-x-12 p-10 md:space-x-16 lg:space-x-20"
       ref={ref}
     >
       <div className="relative flex items-start px-4 md:px-6">
