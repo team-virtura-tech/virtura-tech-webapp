@@ -1,0 +1,7 @@
+{
+  "event": {
+    "token": "TOKEN_FROM_GRECAPTCHA_ENTERPRISE_EXECUTE",
+    "expectedAction": "contact_form_submit",
+    "siteKey": "YOUR_SITE_KEY_HERE"
+  }
+}
