@@ -37,8 +37,26 @@ export async function POST(request: Request) {
       );
     }
 
-    // Create reCAPTCHA Enterprise client using Application Default Credentials
-    const client = new RecaptchaEnterpriseServiceClient();
+    // Create reCAPTCHA Enterprise client using service account credentials
+    let credentials;
+    try {
+      credentials = process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON
+        ? JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON)
+        : undefined;
+    } catch (error) {
+      console.error(
+        'Failed to parse GOOGLE_APPLICATION_CREDENTIALS_JSON:',
+        error
+      );
+      return NextResponse.json(
+        { error: 'Server configuration error' },
+        { status: 500 }
+      );
+    }
+
+    const client = new RecaptchaEnterpriseServiceClient({
+      credentials,
+    });
     const projectPath = client.projectPath(projectId);
 
     // Build the assessment request
