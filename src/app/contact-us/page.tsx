@@ -1,24 +1,9 @@
 'use client';
 
+import { useRecaptcha } from '@/hooks/useRecaptcha';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
-
-declare global {
-  interface Window {
-    onSubmit?: (token: string) => void;
-    grecaptcha?: {
-      enterprise: {
-        execute: (
-          siteKey: string,
-          options: { action: string }
-        ) => Promise<string>;
-        ready: (callback: () => void) => void;
-      };
-      getPageId: () => string;
-    };
-  }
-}
+import { useCallback, useState } from 'react';
 
 type FormData = {
   firstName: string;
@@ -44,7 +29,7 @@ export default function ContactUsPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
-  const [siteKey, setSiteKey] = useState<string>('');
+  const { executeRecaptcha } = useRecaptcha();
 
   const budgetOptions = ['$1,200-2,500', '$2,500-5,000', '$5,000+'];
   const interestOptions = [
@@ -72,75 +57,59 @@ export default function ContactUsPage() {
     }));
   };
 
-  // Add callback function to handle reCAPTCHA response (following HTML button pattern)
-  const handleRecaptchaSubmit = useCallback(
-    async (token: string) => {
-      setIsSubmitting(true);
-      setSubmitMessage('');
+  // Handle form submission with reCAPTCHA
+  const handleFormSubmit = useCallback(async () => {
+    setIsSubmitting(true);
+    setSubmitMessage('');
 
-      try {
-        // Prepare form data with reCAPTCHA token
-        const submissionData = {
-          ...formData,
-          recaptchaToken: token,
-        };
+    try {
+      // Execute reCAPTCHA
+      const token = await executeRecaptcha('contact_form_submit');
 
-        // Submit to API endpoint
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(submissionData),
-        });
+      // Prepare form data with reCAPTCHA token
+      const submissionData = {
+        ...formData,
+        recaptchaToken: token,
+      };
 
-        const result = await response.json();
+      // Submit to API endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submissionData),
+      });
 
-        if (!response.ok) {
-          throw new Error(result.error || 'Failed to submit form');
-        }
+      const result = await response.json();
 
-        setSubmitMessage('Thank you! Your message has been sent successfully.');
-
-        // Reset form
-        setFormData({
-          firstName: '',
-          lastName: '',
-          company: '',
-          email: '',
-          phone: '',
-          budget: '',
-          interests: [],
-          goal: '',
-        });
-      } catch {
-        setSubmitMessage('Something went wrong. Please try again.');
-      } finally {
-        setIsSubmitting(false);
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit form');
       }
-    },
-    [formData]
-  );
 
-  // Set site key on client side to avoid hydration mismatch
-  useEffect(() => {
-    const key = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '';
-    setSiteKey(key);
-  }, []);
+      setSubmitMessage('Thank you! Your message has been sent successfully.');
 
-  // Make the callback function available globally for reCAPTCHA
-  useEffect(() => {
-    // Add global callback function for reCAPTCHA
-    window.onSubmit = handleRecaptchaSubmit;
-
-    return () => {
-      delete window.onSubmit;
-    };
-  }, [handleRecaptchaSubmit]);
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        company: '',
+        email: '',
+        phone: '',
+        budget: '',
+        interests: [],
+        goal: '',
+      });
+    } catch {
+      setSubmitMessage('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [formData, executeRecaptcha]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Form submission will be handled by reCAPTCHA button callback
+    // Form submission will be handled by the submit button
   };
 
   return (
@@ -325,56 +294,21 @@ export default function ContactUsPage() {
             transition={{ delay: 0.7 }}
             className="flex flex-col items-center gap-4 pt-8 md:items-end"
           >
-            {siteKey ? (
-              <button
-                className="g-recaptcha group flex h-32 w-32 items-center justify-center rounded-full border border-gray-600 text-lg font-light transition-all hover:border-white hover:bg-white hover:text-black disabled:opacity-50 disabled:cursor-not-allowed md:h-40 md:w-40 md:text-xl"
-                data-sitekey={siteKey}
-                data-callback="onSubmit"
-                data-action="contact_form_submit"
-                disabled={isSubmitting}
-                onClick={async () => {
-                  try {
-                    if (window.grecaptcha && window.grecaptcha.enterprise) {
-                      const token = await window.grecaptcha.enterprise.execute(
-                        siteKey,
-                        {
-                          action: 'contact_form_submit',
-                        }
-                      );
-                      if (window.onSubmit) {
-                        window.onSubmit(token);
-                      }
-                    }
-                  } catch {
-                    // Silent fail - reCAPTCHA issues will be handled by the API
-                  }
-                }} // Manual execution
-              >
-                {isSubmitting ? (
-                  <div className="h-6 w-6 animate-spin rounded-full border-2 border-gray-400 border-t-white md:h-8 md:w-8" />
-                ) : (
-                  <>
-                    <span className="mr-2">send</span>
-                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1 md:h-6 md:w-6" />
-                  </>
-                )}
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className="group flex h-32 w-32 items-center justify-center rounded-full border border-gray-600 text-lg font-light transition-all hover:border-white hover:bg-white hover:text-black disabled:opacity-50 disabled:cursor-not-allowed md:h-40 md:w-40 md:text-xl"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <div className="h-6 w-6 animate-spin rounded-full border-2 border-gray-400 border-t-white md:h-8 md:w-8" />
-                ) : (
-                  <>
-                    <span className="mr-2">send</span>
-                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1 md:h-6 md:w-6" />
-                  </>
-                )}
-              </button>
-            )}
+            <button
+              type="button"
+              className="group flex h-32 w-32 items-center justify-center rounded-full border border-gray-600 text-lg font-light transition-all hover:border-white hover:bg-white hover:text-black disabled:opacity-50 disabled:cursor-not-allowed md:h-40 md:w-40 md:text-xl"
+              disabled={isSubmitting}
+              onClick={handleFormSubmit}
+            >
+              {isSubmitting ? (
+                <div className="h-6 w-6 animate-spin rounded-full border-2 border-gray-400 border-t-white md:h-8 md:w-8" />
+              ) : (
+                <>
+                  <span className="mr-2">send</span>
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1 md:h-6 md:w-6" />
+                </>
+              )}
+            </button>
 
             {/* Success/Error Message */}
             {submitMessage && (
