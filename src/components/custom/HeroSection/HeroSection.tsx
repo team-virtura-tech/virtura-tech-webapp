@@ -1,4 +1,9 @@
+'use client';
+
+import { FlexiCarousel } from '@/components/custom/FlexiCarousel';
 import { cn } from '@/lib/utils';
+import { FaNodeJs, FaReact } from 'react-icons/fa';
+import { SiNextdotjs, SiTailwindcss, SiTypescript } from 'react-icons/si';
 
 export type HeroSectionProps = {
   className?: string;
@@ -52,9 +57,16 @@ export const HeroSection = ({ className }: HeroSectionProps) => {
                 className="hero-square bg-foreground rounded-xl md:rounded-2xl shadow-lg flex items-center justify-center"
                 style={{ transform: 'rotate(2deg)' }}
               >
-                <span className="text-white font-medium text-xs md:text-sm">
-                  etter
-                </span>
+                <FlexiCarousel
+                  items={[
+                    { logo: FaReact, text: 'React' },
+                    { logo: SiNextdotjs, text: 'Next.js' },
+                    { logo: SiTypescript, text: 'TypeScript' },
+                    { logo: SiTailwindcss, text: 'Tailwind' },
+                    { logo: FaNodeJs, text: 'Node.js' },
+                  ]}
+                  className="text-background"
+                />
               </div>
               <h1
                 className="text-4xl md:text-8xl lg:text-9xl font-bold"
