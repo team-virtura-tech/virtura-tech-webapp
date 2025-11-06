@@ -1,5 +1,4 @@
-// import { HeroSection } from '@/components/custom/HeroSection';
-// import { InnovationSection } from '@/components/custom/InnovationSection';
+import { Navbar } from '@/components/custom/Navbar';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import '../styles/target-cursor.css';
@@ -38,8 +37,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* <HeroSection />
-        <InnovationSection /> */}
+        <Navbar />
         {children}
       </body>
     </html>
