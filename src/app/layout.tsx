@@ -1,3 +1,4 @@
+import { LenisSmoothScroll } from '@/components/common/LenisSmoothScroll';
 import { Navbar } from '@/components/custom/Navbar';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
@@ -37,8 +38,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
-        {children}
+        <LenisSmoothScroll>
+          <Navbar />
+          {children}
+        </LenisSmoothScroll>
       </body>
     </html>
   );

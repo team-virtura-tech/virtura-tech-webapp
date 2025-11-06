@@ -170,6 +170,19 @@
     @apply bg-background text-foreground;
   }
 
+  /* Lenis smooth scrolling optimizations */
+  html.lenis {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
   /* Custom stat number styling */
   .stat-number {
     font-family: 'TT Norms Web', Arial, sans-serif;
