@@ -1,3 +1,4 @@
+import { ContactButton } from '@/components/custom/ContactButton';
 import { HeroSection } from '@/components/custom/HeroSection';
 import { InnovationSection } from '@/components/custom/InnovationSection';
 // import { ProjectShowcase } from '@/components/custom/ProjectShowcase';
@@ -10,7 +11,7 @@ export default function Home() {
         <HeroSection />
         <InnovationSection />
         <Projects />
-        {/* <ProjectShowcase /> */}
+        <ContactButton />
       </main>
     </div>
   );
