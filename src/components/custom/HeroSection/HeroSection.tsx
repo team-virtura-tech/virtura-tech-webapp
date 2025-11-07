@@ -38,7 +38,7 @@ export const HeroSection = ({ className }: HeroSectionProps) => {
                 Brands
               </h1>
               <div
-                className="hero-square bg-white rounded-xl md:rounded-2xl shadow-lg flex items-center justify-center"
+                className="hero-square bg-white rounded-xl md:rounded-4xl shadow-lg flex items-center justify-center"
                 style={{ transform: 'rotate(-2deg)' }}
               >
                 <div className="w-10 h-6 md:w-16 md:h-10 bg-gray-100 rounded border-2 border-gray-200"></div>
@@ -54,7 +54,7 @@ export const HeroSection = ({ className }: HeroSectionProps) => {
                 Fast
               </h1>
               <div
-                className="hero-square bg-foreground rounded-xl md:rounded-2xl shadow-lg flex items-center justify-center"
+                className="hero-square bg-foreground rounded-xl md:rounded-4xl shadow-lg flex items-center justify-center"
                 style={{ transform: 'rotate(2deg)' }}
               >
                 <FlexiCarousel

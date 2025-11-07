@@ -3,6 +3,7 @@
 import { cn } from '@/lib/utils';
 import { motion, useReducedMotion } from 'framer-motion';
 
+import { TextRevealByWord } from '@/components/ui/text-reveal';
 import { TargetCursor } from '../TargetCursor';
 import { AnimatedStat } from './AnimatedStat';
 
@@ -40,7 +41,7 @@ export const InnovationSection = ({
       id="InnovationSection"
       data-component="InnovationSection"
       className={cn(
-        'sticky top-0 bg-white text-gray-900 py-16 md:py-24 lg:py-32 min-h-screen z-10',
+        'sticky top-0 bg-background text-foreground py-16 md:py-24 lg:py-32 min-h-screen z-10',
         className
       )}
     >
@@ -55,12 +56,10 @@ export const InnovationSection = ({
             className="space-y-16 lg:space-y-20 lg:col-span-3"
           >
             {/* Main heading */}
-            <h2 className="text-4xl font-light leading-tight md:text-5xl lg:text-5xl xl:text-5xl">
-              We are committed to finding{' '}
-              <span className="font-normal">innovative and unconventional</span>{' '}
-              solutions. Pushing boundaries to{' '}
-              <span className="font-normal">exceed client goals.</span>
-            </h2>
+            <TextRevealByWord
+              text="We are committed to finding innovative and unconventional solutions. Pushing boundaries to exceed client goals."
+              className="h-auto"
+            />
 
             {/* Industry tags */}
             <div className="flex flex-wrap gap-4 lg:gap-6">
@@ -75,7 +74,7 @@ export const InnovationSection = ({
                     delay: reduce ? 0 : index * 0.05,
                     ease: 'easeOut',
                   }}
-                  className="cursor-target rounded-full border border-gray-300 px-6 py-3 text-sm text-gray-600 transition-colors hover:border-gray-900 hover:text-gray-900 lg:px-8 lg:py-4 lg:text-base"
+                  className="cursor-target rounded-full border border-gray-300 px-6 py-3 text-sm text-muted-foreground transition-colors hover:border-gray-900 lg:px-8 lg:py-4 lg:text-base"
                 >
                   {tag}
                 </motion.span>

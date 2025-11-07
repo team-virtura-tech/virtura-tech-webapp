@@ -2,7 +2,7 @@ import { ContactButton } from '@/components/custom/ContactButton';
 import { HeroSection } from '@/components/custom/HeroSection';
 import { InnovationSection } from '@/components/custom/InnovationSection';
 // import { ProjectShowcase } from '@/components/custom/ProjectShowcase';
-import { Projects } from '@/components/custom/ProjectShowcase/Projects';
+// import { Projects } from '@/components/custom/ProjectShowcase/Projects';
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
       <main className="relative">
         <HeroSection />
         <InnovationSection />
-        <Projects />
+        {/* <Projects /> */}
         <ContactButton />
       </main>
     </div>
