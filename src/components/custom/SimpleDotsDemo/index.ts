@@ -1,1 +1,0 @@
-export { SimpleDotsDemo } from './SimpleDotsDemo';
