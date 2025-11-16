@@ -59,10 +59,13 @@ export function Waves({
     setSize();
     setLines();
 
+    // Capture container ref for cleanup
+    const container = containerRef.current;
+
     // Bind events
     window.addEventListener('resize', onResize);
     window.addEventListener('mousemove', onMouseMove);
-    containerRef.current.addEventListener('touchmove', onTouchMove, {
+    container?.addEventListener('touchmove', onTouchMove, {
       passive: false,
     });
 
@@ -73,8 +76,9 @@ export function Waves({
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       window.removeEventListener('resize', onResize);
       window.removeEventListener('mousemove', onMouseMove);
-      containerRef.current?.removeEventListener('touchmove', onTouchMove);
+      container?.removeEventListener('touchmove', onTouchMove);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Set SVG size

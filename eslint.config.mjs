@@ -21,6 +21,7 @@ const eslintConfig = [
       '.husky/**',
       '.vscode/**',
       'coverage/**',
+      'next-env.d.ts',
     ],
   },
   // 1) Load all the legacy shareable configs:
