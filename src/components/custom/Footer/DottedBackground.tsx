@@ -69,7 +69,7 @@ export const DottedSurface = ({ className }: DottedSurfaceProps) => {
     // Point material with size attenuation for depth
     const material = new THREE.PointsMaterial({
       color: 0xffffff,
-      size: 4,
+      size: 2,
       sizeAttenuation: true,
       transparent: true,
       opacity: 0.9,
