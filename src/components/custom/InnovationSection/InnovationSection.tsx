@@ -11,10 +11,10 @@ export type InnovationSectionProps = {
   className?: string;
   videoSrc?: string;
 };
-
+// video is from https://spacetypegenerator.com/snap
 export const InnovationSection = ({
   className,
-  videoSrc = '/placeholder-video.mp4',
+  videoSrc = '/videos/brand_video.mp4',
 }: InnovationSectionProps) => {
   const reduce = useReducedMotion();
 
