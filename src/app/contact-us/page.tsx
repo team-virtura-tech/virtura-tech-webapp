@@ -1,6 +1,7 @@
 'use client';
 
 import { Globe } from '@/components/ui/globe';
+import { useToasts } from '@/components/ui/toast';
 import { useRecaptcha } from '@/hooks/useRecaptcha';
 import { motion } from 'framer-motion';
 import { useCallback, useState } from 'react';
@@ -30,11 +31,11 @@ export default function ContactUsPage() {
     goal: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
   const [copiedField, setCopiedField] = useState<'email' | 'phone' | null>(
     null
   );
   const { executeRecaptcha } = useRecaptcha();
+  const toasts = useToasts();
 
   // Format phone number as (XXX) XXX-XXXX
   const formatPhoneNumber = (value: string) => {
@@ -83,10 +84,35 @@ export default function ContactUsPage() {
     }));
   };
 
+  // Validate required fields
+  const isFormValid =
+    formData.firstName.trim() !== '' &&
+    formData.lastName.trim() !== '' &&
+    formData.email.trim() !== '' &&
+    (formData.phone.trim() !== '' || formData.email.trim() !== '') &&
+    formData.goal.trim() !== '';
+
   // Handle form submission with reCAPTCHA
   const handleFormSubmit = useCallback(async () => {
+    // Validate required fields
+    if (!formData.firstName.trim()) {
+      toasts.error('Please enter your first name.');
+      return;
+    }
+    if (!formData.lastName.trim()) {
+      toasts.error('Please enter your last name.');
+      return;
+    }
+    if (!formData.email.trim()) {
+      toasts.error('Please enter your email address.');
+      return;
+    }
+    if (!formData.goal.trim()) {
+      toasts.error('Please describe your goal.');
+      return;
+    }
+
     setIsSubmitting(true);
-    setSubmitMessage('');
 
     try {
       // Execute reCAPTCHA
@@ -113,7 +139,7 @@ export default function ContactUsPage() {
         throw new Error(result.error || 'Failed to submit form');
       }
 
-      setSubmitMessage('Thank you! Your message has been sent successfully.');
+      toasts.success('Thank you! Your message has been sent successfully.');
 
       // Reset form
       setFormData({
@@ -127,11 +153,11 @@ export default function ContactUsPage() {
         goal: '',
       });
     } catch {
-      setSubmitMessage('Something went wrong. Please try again.');
+      toasts.error('Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
-  }, [formData, executeRecaptcha]);
+  }, [formData, executeRecaptcha, toasts]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -506,7 +532,7 @@ export default function ContactUsPage() {
       <section className="relative min-h-screen w-full py-16 md:py-24">
         <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 px-6 md:px-8 lg:grid-cols-2 lg:gap-16">
           {/* Left Column - Tagline */}
-          <div className="flex items-center justify-center lg:justify-start">
+          <div className="flex items-start justify-center lg:justify-start">
             <div className="max-w-md">
               <motion.h2
                 initial={{ opacity: 0, x: -20 }}
@@ -539,7 +565,7 @@ export default function ContactUsPage() {
                 className="space-y-3"
               >
                 <span className="block text-base font-light md:text-lg">
-                  My name is
+                  My name is <span className="text-red-500">*</span>
                 </span>
                 <div className="flex flex-col gap-4 md:flex-row md:gap-6">
                   <input
@@ -590,7 +616,7 @@ export default function ContactUsPage() {
                 className="space-y-3"
               >
                 <span className="block text-base font-light md:text-lg">
-                  You can reach me at
+                  You can reach me at <span className="text-red-500">*</span>
                 </span>
                 <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-4">
                   <input
@@ -675,7 +701,7 @@ export default function ContactUsPage() {
                 className="space-y-3"
               >
                 <span className="block text-base font-light md:text-lg">
-                  My goal is to
+                  My goal is to <span className="text-red-500">*</span>
                 </span>
                 <textarea
                   placeholder="Please tell me more about your project"
@@ -696,7 +722,7 @@ export default function ContactUsPage() {
                 <button
                   type="button"
                   className="group flex h-28 w-28 items-center justify-center rounded-full border border-gray-600 text-base font-light transition-all hover:bg-primary hover:text-black disabled:cursor-not-allowed disabled:opacity-50 md:h-32 md:w-32 md:text-lg"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !isFormValid}
                   onClick={handleFormSubmit}
                 >
                   {isSubmitting ? (
@@ -760,21 +786,6 @@ export default function ContactUsPage() {
                     </>
                   )}
                 </button>
-
-                {/* Success/Error Message */}
-                {submitMessage && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={`text-center text-sm md:text-base ${
-                      submitMessage.includes('success')
-                        ? 'text-green-400'
-                        : 'text-red-400'
-                    }`}
-                  >
-                    {submitMessage}
-                  </motion.div>
-                )}
               </motion.div>
             </form>
           </div>
