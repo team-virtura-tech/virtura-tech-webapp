@@ -1,5 +1,7 @@
 import { LenisSmoothScroll } from '@/components/common/LenisSmoothScroll';
+import { Footer } from '@/components/custom/Footer';
 import { Navbar } from '@/components/custom/Navbar';
+import { SimpleDotsDemo } from '@/components/custom/SimpleDotsDemo/SimpleDotsDemo';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import '../styles/target-cursor.css';
@@ -41,6 +43,8 @@ export default function RootLayout({
         <LenisSmoothScroll>
           <Navbar />
           {children}
+          <SimpleDotsDemo />
+          <Footer />
         </LenisSmoothScroll>
       </body>
     </html>
