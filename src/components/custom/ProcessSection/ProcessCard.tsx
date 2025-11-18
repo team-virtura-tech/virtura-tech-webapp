@@ -1,10 +1,5 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-
-import ScrambleIn, {
-  ScrambleInHandle,
-} from '@/components/fancy/text/scramble-in';
 import { cn } from '@/lib/utils';
 
 export type ProcessCardProps = {
@@ -13,7 +8,6 @@ export type ProcessCardProps = {
   subtitle: string;
   description: string;
   isElevated?: boolean;
-  animationDelay?: number;
 };
 
 export const ProcessCard = ({
@@ -22,18 +16,7 @@ export const ProcessCard = ({
   subtitle,
   description,
   isElevated = false,
-  animationDelay = 0,
 }: ProcessCardProps) => {
-  const scrambleRef = useRef<ScrambleInHandle | null>(null);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      scrambleRef.current?.start();
-    }, animationDelay);
-
-    return () => clearTimeout(timer);
-  }, [animationDelay]);
-
   return (
     <article
       data-component="ProcessCard"
@@ -65,15 +48,7 @@ export const ProcessCard = ({
           {subtitle}
         </p>
         <p className="text-sm leading-relaxed text-white/70 md:text-base">
-          <ScrambleIn
-            ref={scrambleRef}
-            text={description}
-            scrambleSpeed={50}
-            scrambledLetterCount={5}
-            autoStart={false}
-            className="text-white/70"
-            scrambledClassName="text-white/50"
-          />
+          {description}
         </p>
       </div>
     </article>

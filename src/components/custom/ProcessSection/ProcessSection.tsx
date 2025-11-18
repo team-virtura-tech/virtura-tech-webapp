@@ -81,7 +81,6 @@ export const ProcessSection = ({ className }: ProcessSectionProps) => {
               key={step.number}
               {...step}
               isElevated={index === 1 || index === 3}
-              animationDelay={index * 150}
             />
           ))}
         </div>

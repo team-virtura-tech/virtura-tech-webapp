@@ -17,7 +17,7 @@ export const ContactButton = ({ className }: ContactButtonProps) => {
     >
       <Link
         href="/contact-us"
-        className="group relative flex flex-col text-background items-center py-4 md:py-6 px-3 md:px-4 rounded-l-xl md:rounded-l-2xl shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-105"
+        className="group relative flex flex-col bg-background items-center py-4 md:py-6 px-3 md:px-4 rounded-l-xl md:rounded-l-2xl shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-105"
       >
         {/* Email Icon */}
         <div className="mb-4 md:mb-6">
