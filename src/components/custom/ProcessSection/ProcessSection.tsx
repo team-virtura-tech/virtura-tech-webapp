@@ -48,15 +48,15 @@ export const ProcessSection = ({ className }: ProcessSectionProps) => {
       )}
     >
       {/* Decorative header */}
-      <div className="mb-16 md:mb-20 lg:mb-24">
+      <div className="mb-16 md:mb-20 lg:mb-40">
         <div className="relative mx-auto flex max-w-5xl items-center justify-center">
           <div
             className="absolute inset-0 flex items-center"
             aria-hidden="true"
           >
-            <div className="w-full border-t border-[#D5D5D5]"></div>
+            <div className="w-full border-t border-muted-foreground"></div>
           </div>
-          <p className="relative bg-[#FFFFFF] px-4 font-serif text-sm italic text-muted-foreground md:text-base">
+          <p className="relative bg-[#D9D9D9] px-4 font-serif text-sm italic text-muted-foreground md:text-base">
             Our Process, Explained
           </p>
         </div>
@@ -102,7 +102,7 @@ const ProcessCard = ({
       className={cn(
         'relative flex flex-col justify-between rounded-[32px] border-[6px] border-[#D5D5D5] bg-[#FFFFFF] p-8 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.06)] transition-all hover:shadow-[0_4px_12px_rgba(0,0,0,0.06),0_12px_32px_rgba(0,0,0,0.08)] md:p-10 lg:p-12',
         // Taller aspect ratio to match the reference screenshots
-        'min-h-[500px] md:min-h-[550px] lg:min-h-[600px]',
+        'min-h-[300px] md:min-h-[400px] lg:min-h-[450px]',
         // Stagger cards 2 & 4 upward
         isElevated && 'lg:-translate-y-16'
       )}
