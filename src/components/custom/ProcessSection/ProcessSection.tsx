@@ -43,8 +43,9 @@ export const ProcessSection = ({ className }: ProcessSectionProps) => {
     <section
       id="ProcessSection"
       data-component="ProcessSection"
+      style={{ backgroundColor: 'oklch(0.261 0.004 85)' }}
       className={cn(
-        'relative  bg-muted-foreground z-20 min-h-screen mx-auto w-full px-4 py-16 md:px-6 md:py-24 lg:py-32',
+        'relative z-20 min-h-screen mx-auto w-full px-4 py-16 md:px-6 md:py-24 lg:py-32',
         className
       )}
     >
@@ -55,13 +56,19 @@ export const ProcessSection = ({ className }: ProcessSectionProps) => {
             className="absolute inset-0 flex items-center"
             aria-hidden="true"
           >
-            <div className="w-full border-t border-muted-foreground"></div>
+            <div
+              className="w-full border-t"
+              style={{ borderColor: 'oklch(0.362 0.008 75)' }}
+            ></div>
           </div>
-          <p className="relative bg-[#D9D9D9] px-4 font-serif text-sm italic text-muted-foreground md:text-base">
+          <p
+            className="relative px-4 font-serif text-sm italic text-white md:text-base"
+            style={{ backgroundColor: 'oklch(0.261 0.004 85)' }}
+          >
             Our Process, Explained
           </p>
         </div>
-        <h2 className="mt-6 text-center text-3xl font-medium text-foreground md:text-4xl lg:text-5xl">
+        <h2 className="mt-6 text-center text-3xl font-medium text-white md:text-4xl lg:text-5xl">
           Here&apos;s how it works
         </h2>
       </div>
