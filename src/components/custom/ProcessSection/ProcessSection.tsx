@@ -37,14 +37,14 @@ const PROCESS_STEPS = [
 export type ProcessSectionProps = {
   className?: string;
 };
-
+// bg-[#D9D9D9]
 export const ProcessSection = ({ className }: ProcessSectionProps) => {
   return (
     <section
       id="ProcessSection"
       data-component="ProcessSection"
       className={cn(
-        'relative bg-[#D9D9D9] z-20 min-h-screen mx-auto w-full px-4 py-16 md:px-6 md:py-24 lg:py-32',
+        'relative  bg-muted-foreground z-20 min-h-screen mx-auto w-full px-4 py-16 md:px-6 md:py-24 lg:py-32',
         className
       )}
     >

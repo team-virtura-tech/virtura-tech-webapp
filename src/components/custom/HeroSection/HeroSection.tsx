@@ -31,10 +31,7 @@ export const HeroSection = ({ className }: HeroSectionProps) => {
           <div className="text-center max-w-6xl mx-auto px-4 md:px-8">
             {/* First Line: Brands + Rectangle + Grow */}
             <div className="flex items-center justify-center gap-3 md:gap-8 mb-2 md:mb-6">
-              <h1
-                className="text-4xl md:text-8xl lg:text-9xl font-bold"
-                style={{ color: 'var(--background)' }}
-              >
+              <h1 className="text-background text-4xl md:text-8xl lg:text-9xl font-bold">
                 Brands
               </h1>
               <div
@@ -68,10 +65,7 @@ export const HeroSection = ({ className }: HeroSectionProps) => {
                   className="text-background"
                 />
               </div>
-              <h1
-                className="text-4xl md:text-8xl lg:text-9xl font-bold"
-                style={{ color: 'var(--background)' }}
-              >
+              <h1 className="text-background text-4xl md:text-8xl lg:text-9xl font-bold">
                 With us
               </h1>
             </div>
