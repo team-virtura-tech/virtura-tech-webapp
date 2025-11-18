@@ -15,6 +15,7 @@ const TextRevealByWord: FC<TextRevealByWordProps> = ({ text, className }) => {
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
+    offset: ['start 0.1', 'end 2'],
   });
   const words = text.split(' ');
 

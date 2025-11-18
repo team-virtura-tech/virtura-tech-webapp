@@ -41,7 +41,7 @@ export const InnovationSection = ({
       id="InnovationSection"
       data-component="InnovationSection"
       className={cn(
-        'sticky top-0 bg-background text-foreground py-16 md:py-24 lg:py-32 min-h-screen z-10',
+        'sticky top-0 bg-background text-foreground py-16 md:py-24 lg:py-24 min-h-screen z-10',
         className
       )}
     >
@@ -53,7 +53,7 @@ export const InnovationSection = ({
             whileInView={reduce ? {} : { opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="space-y-16 lg:space-y-20 lg:col-span-3"
+            className="space-y-8 lg:space-y-10 lg:col-span-3"
           >
             {/* Main heading */}
             <TextRevealByWord
