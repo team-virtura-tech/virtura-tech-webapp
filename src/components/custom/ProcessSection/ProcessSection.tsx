@@ -3,6 +3,10 @@
 import { cn } from '@/lib/utils';
 import { ProcessCard } from './ProcessCard';
 
+// Animation config - easy to adjust (currently passed directly to cards)
+// To modify animation timing, update the duration/ease values in ProcessCard component
+// or adjust the initial positions below
+
 const PROCESS_STEPS = [
   {
     number: '1',
@@ -10,6 +14,9 @@ const PROCESS_STEPS = [
     subtitle: 'Discovery & Strategy',
     description:
       'Define goals, audience, and scope. Map features and success metrics to finalize timeline and pricing.',
+    initialRotate: -15,
+    initialX: -100,
+    initialY: 80,
   },
   {
     number: '2',
@@ -17,6 +24,9 @@ const PROCESS_STEPS = [
     subtitle: 'UX & UI',
     description:
       'Build sitemap, wireframes, and visual design. Create interactive mockups with colors, typography, and components.',
+    initialRotate: -8,
+    initialX: -50,
+    initialY: -60,
   },
   {
     number: '3',
@@ -24,6 +34,9 @@ const PROCESS_STEPS = [
     subtitle: 'Development',
     description:
       'Set up components, CMS, and data sources. Implement responsive layouts, animations, and integrate APIs.',
+    initialRotate: -5,
+    initialX: 50,
+    initialY: -40,
   },
   {
     number: '4',
@@ -31,6 +44,9 @@ const PROCESS_STEPS = [
     subtitle: 'Testing & Deployment',
     description:
       'Test performance, SEO, and mobile responsiveness. Connect domain, SSL, and analytics for production launch.',
+    initialRotate: 15,
+    initialX: 100,
+    initialY: 60,
   },
 ];
 

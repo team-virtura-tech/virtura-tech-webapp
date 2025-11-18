@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import { motion, useReducedMotion } from 'framer-motion';
 
 export type ProcessCardProps = {
   number: string;
@@ -8,6 +9,9 @@ export type ProcessCardProps = {
   subtitle: string;
   description: string;
   isElevated?: boolean;
+  initialRotate?: number;
+  initialX?: number;
+  initialY?: number;
 };
 
 export const ProcessCard = ({
@@ -16,10 +20,41 @@ export const ProcessCard = ({
   subtitle,
   description,
   isElevated = false,
+  initialRotate = 0,
+  initialX = 0,
+  initialY = 0,
 }: ProcessCardProps) => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <article
+    <motion.article
       data-component="ProcessCard"
+      initial={
+        shouldReduceMotion
+          ? false
+          : {
+              opacity: 0,
+              rotate: initialRotate,
+              x: initialX,
+              y: initialY,
+            }
+      }
+      whileInView={
+        shouldReduceMotion
+          ? {}
+          : {
+              opacity: 1,
+              rotate: 0,
+              x: 0,
+              y: 0,
+            }
+      }
+      viewport={{ once: true, margin: '-100px' }}
+      transition={{
+        duration: 0.8,
+        ease: [0.25, 0.1, 0.25, 1], // smooth easeInOut
+        delay: 0.3, // delay in seconds before animation starts
+      }}
       style={{
         backgroundColor: 'oklch(0.362 0.008 75)',
         borderColor: 'oklch(0.362 0.008 75)',
@@ -51,6 +86,6 @@ export const ProcessCard = ({
           {description}
         </p>
       </div>
-    </article>
+    </motion.article>
   );
 };
