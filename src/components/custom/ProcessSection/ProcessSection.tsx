@@ -1,5 +1,10 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
+
+import ScrambleIn, {
+  ScrambleInHandle,
+} from '@/components/fancy/text/scramble-in';
 import { cn } from '@/lib/utils';
 
 const PROCESS_STEPS = [
@@ -73,6 +78,7 @@ export const ProcessSection = ({ className }: ProcessSectionProps) => {
               key={step.number}
               {...step}
               isElevated={index === 1 || index === 3}
+              animationDelay={index * 150}
             />
           ))}
         </div>
@@ -87,6 +93,7 @@ type ProcessCardProps = {
   subtitle: string;
   description: string;
   isElevated?: boolean;
+  animationDelay?: number;
 };
 
 const ProcessCard = ({
@@ -95,7 +102,18 @@ const ProcessCard = ({
   subtitle,
   description,
   isElevated = false,
+  animationDelay = 0,
 }: ProcessCardProps) => {
+  const scrambleRef = useRef<ScrambleInHandle | null>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      scrambleRef.current?.start();
+    }, animationDelay);
+
+    return () => clearTimeout(timer);
+  }, [animationDelay]);
+
   return (
     <article
       data-component="ProcessCard"
@@ -123,7 +141,15 @@ const ProcessCard = ({
           {subtitle}
         </p>
         <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
-          {description}
+          <ScrambleIn
+            ref={scrambleRef}
+            text={description}
+            scrambleSpeed={50}
+            scrambledLetterCount={5}
+            autoStart={false}
+            className="text-muted-foreground"
+            scrambledClassName="text-muted-foreground/50"
+          />
         </p>
       </div>
     </article>
