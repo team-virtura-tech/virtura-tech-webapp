@@ -17,11 +17,12 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
-  { label: 'Process', href: '/process' },
-  { label: 'Portfolio', href: '/portfolio' },
-  { label: 'About', href: '/about' },
-  { label: 'Price', href: '/price' },
-  { label: 'FAQ', href: '/faq' },
+  // { label: 'Process', href: '/process' },
+  // { label: 'Portfolio', href: '/portfolio' },
+  // { label: 'About', href: '/about' },
+  // { label: 'Price', href: '/price' },
+  // { label: 'FAQ', href: '/faq' },
+  { label: 'Fish Bros Shop Demo', href: '/fish-bros-shop-demo' },
   { label: 'Contact', href: '/contact-us' },
 ];
 
@@ -185,7 +186,7 @@ export const Navbar = ({ className }: NavbarProps) => {
                 ))}
 
                 {/* Social links */}
-                <div className="flex items-center gap-6 mt-12">
+                {/* <div className="flex items-center gap-6 mt-12">
                   <a
                     href="mailto:hello@example.com"
                     className="w-12 h-12 rounded-full border border-foreground/20 flex items-center justify-center hover:bg-foreground hover:text-background transition-colors duration-300"
@@ -244,7 +245,7 @@ export const Navbar = ({ className }: NavbarProps) => {
                       />
                     </svg>
                   </a>
-                </div>
+                </div> */}
               </div>
 
               {/* Bottom text */}
