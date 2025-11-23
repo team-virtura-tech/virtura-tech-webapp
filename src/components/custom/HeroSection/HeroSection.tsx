@@ -1,6 +1,7 @@
 'use client';
 
 import { FlexiCarousel } from '@/components/custom/FlexiCarousel';
+import { VerticalCarousel } from '@/components/custom/VerticalCarousel';
 import { cn } from '@/lib/utils';
 import { FaNodeJs, FaReact } from 'react-icons/fa';
 import { SiNextdotjs, SiTailwindcss, SiTypescript } from 'react-icons/si';
@@ -35,10 +36,25 @@ export const HeroSection = ({ className }: HeroSectionProps) => {
                 Brands
               </h1>
               <div
-                className="hero-square bg-white rounded-xl md:rounded-4xl shadow-lg flex items-center justify-center"
+                className="hero-square bg-white rounded-xl md:rounded-4xl shadow-lg flex items-center justify-center overflow-hidden"
                 style={{ transform: 'rotate(-2deg)' }}
               >
-                <div className="w-10 h-6 md:w-16 md:h-10 bg-gray-100 rounded border-2 border-gray-200"></div>
+                <VerticalCarousel
+                  items={[
+                    {
+                      src: '/images/clients/alliance-medical.png',
+                      alt: 'Alliance Medical Supply',
+                    },
+                    {
+                      src: '/images/clients/easy-ca-drivers-ed.png',
+                      alt: 'Easy CA Drivers Ed',
+                    },
+                    {
+                      src: '/images/clients/mail-all-center.png',
+                      alt: 'Mail All Center',
+                    },
+                  ]}
+                />
               </div>
               <h1 className="text-4xl md:text-8xl lg:text-9xl font-bold text-muted-foreground">
                 Grow
