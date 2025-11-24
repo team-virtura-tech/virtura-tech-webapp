@@ -1,23 +1,61 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 import { DottedBackground } from './DottedBackground';
 
 const footerLinks = {
   navigate: [
     { label: 'Home', href: '/' },
-    { label: 'Process', href: '/process' },
-    { label: 'Portfolio', href: '/portfolio' },
-    { label: 'About', href: '/about' },
+    { label: 'Showcase', href: '/showcase' },
   ],
-  services: [
-    { label: 'Price', href: '/price' },
-    { label: 'FAQ', href: '/faq' },
-    { label: 'Contact', href: '/contact-us' },
-  ],
+  services: [{ label: 'Contact', href: '/contact-us' }],
 };
 
+const CopyIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+  </svg>
+);
+
+const CopySuccessIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+);
+
 export function Footer() {
+  const [copiedField, setCopiedField] = useState<'email' | 'phone' | null>(
+    null
+  );
+
+  const handleCopy = (text: string, field: 'email' | 'phone') => {
+    navigator.clipboard.writeText(text);
+    setCopiedField(field);
+    setTimeout(() => setCopiedField(null), 2000);
+  };
+
   return (
     <footer
       id="Footer"
@@ -89,6 +127,66 @@ export function Footer() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </div>
+
+          {/* Contact Info Section */}
+          <div className="mb-16 md:mb-20">
+            <h3 className="mb-8 text-xs font-bold uppercase tracking-[0.2em] text-white/40">
+              Get in Touch
+            </h3>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {/* Email */}
+              <div
+                className="group cursor-pointer rounded-lg border border-white/10 bg-white/5 p-6 transition-all hover:border-white/30 hover:bg-white/10"
+                onClick={() =>
+                  handleCopy('team.virturatech@gmail.com', 'email')
+                }
+              >
+                <p className="mb-3 text-xs uppercase tracking-wider text-white/40">
+                  Direct Email
+                </p>
+                <div className="flex items-center justify-between">
+                  <p className="font-mono text-base text-white/90 md:text-lg lg:text-xl">
+                    team.virturatech@gmail.com
+                  </p>
+                  <button
+                    className="ml-4 rounded-md p-2 text-white/60 transition-colors group-hover:text-white"
+                    aria-label="Copy email"
+                  >
+                    {copiedField === 'email' ? (
+                      <CopySuccessIcon />
+                    ) : (
+                      <CopyIcon />
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* Phone */}
+              <div
+                className="group cursor-pointer rounded-lg border border-white/10 bg-white/5 p-6 transition-all hover:border-white/30 hover:bg-white/10"
+                onClick={() => handleCopy('+15104588787', 'phone')}
+              >
+                <p className="mb-3 text-xs uppercase tracking-wider text-white/40">
+                  Direct Phone
+                </p>
+                <div className="flex items-center justify-between">
+                  <p className="font-mono text-base text-white/90 md:text-lg lg:text-xl">
+                    +1 (510)-458-8787
+                  </p>
+                  <button
+                    className="ml-4 rounded-md p-2 text-white/60 transition-colors group-hover:text-white"
+                    aria-label="Copy phone number"
+                  >
+                    {copiedField === 'phone' ? (
+                      <CopySuccessIcon />
+                    ) : (
+                      <CopyIcon />
+                    )}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
