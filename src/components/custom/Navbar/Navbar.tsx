@@ -18,11 +18,6 @@ type NavItem = {
 const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
   { label: 'Showcase', href: '/showcase' },
-  // { label: 'Process', href: '/process' },
-  // { label: 'About', href: '/about' },
-  // { label: 'Price', href: '/price' },
-  // { label: 'FAQ', href: '/faq' },
-  { label: 'Fish Bros Shop Demo', href: '/fish-bros-shop-demo' },
   { label: 'Contact', href: '/contact-us' },
 ];
 
