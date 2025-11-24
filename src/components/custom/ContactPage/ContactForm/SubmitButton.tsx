@@ -16,21 +16,27 @@ export const SubmitButton = ({
 }: SubmitButtonProps) => {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ delay }}
-      className="flex flex-col items-center gap-4 pt-4 md:items-end"
+      className="w-full pt-4"
     >
       <button
         type="button"
-        className="group flex h-28 w-28 items-center justify-center rounded-full border border-border text-base font-light transition-all hover:bg-primary hover:text-primary-foreground disabled:cursor-not-allowed disabled:opacity-50 md:h-32 md:w-32 md:text-lg"
+        className="group flex w-full items-center justify-center gap-3 rounded-lg border border-border bg-transparent px-8 py-3 text-base font-medium transition-all hover:bg-primary hover:text-primary-foreground disabled:cursor-not-allowed disabled:opacity-50 md:text-lg"
         disabled={isSubmitting || isDisabled}
         onClick={onClick}
       >
         {isSubmitting ? (
-          <div className="h-6 w-6 animate-spin rounded-full border-2 border-muted-foreground border-t-foreground md:h-8 md:w-8" />
+          <>
+            <span>Sending</span>
+            <div className="h-5 w-5 animate-spin rounded-full border-2 border-current border-t-transparent" />
+          </>
         ) : (
-          <UploadIcon />
+          <>
+            <span>Send</span>
+            <UploadIcon />
+          </>
         )}
       </button>
     </motion.div>
