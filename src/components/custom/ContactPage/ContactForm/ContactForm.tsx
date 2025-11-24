@@ -224,25 +224,25 @@ export const ContactForm = ({ id, className }: ContactFormProps) => {
 
             {/* Contact Fields */}
             <FormField label="You can reach me at" required delay={0.3}>
-              <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-4">
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  value={formData.email}
-                  onChange={(e) => handleInputChange('email', e.target.value)}
-                  className="flex-1 border-b border-border bg-transparent pb-2 text-base placeholder-muted-foreground focus:border-foreground focus:outline-none md:text-lg"
-                />
-                <span className="text-sm text-muted-foreground md:text-base">
-                  or
-                </span>
-                <input
-                  type="tel"
-                  placeholder="(555) 123-4567"
-                  value={formData.phone}
-                  onChange={(e) => handlePhoneChange(e.target.value)}
-                  className="flex-1 border-b border-border bg-transparent pb-2 text-base placeholder-muted-foreground focus:border-foreground focus:outline-none md:text-lg"
-                />
-              </div>
+              <input
+                type="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={(e) => handleInputChange('email', e.target.value)}
+                required
+                className="w-full border-b border-border bg-transparent pb-2 text-base placeholder-muted-foreground focus:border-foreground focus:outline-none md:text-lg"
+              />
+            </FormField>
+
+            {/* Phone Field (Optional) */}
+            <FormField label="Phone" delay={0.35}>
+              <input
+                type="tel"
+                placeholder="(555) 123-4567"
+                value={formData.phone}
+                onChange={(e) => handlePhoneChange(e.target.value)}
+                className="w-full border-b border-border bg-transparent pb-2 text-base placeholder-muted-foreground focus:border-foreground focus:outline-none md:text-lg"
+              />
             </FormField>
 
             {/* Budget Section */}
